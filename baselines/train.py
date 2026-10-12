@@ -34,6 +34,7 @@ def run(args):
     if not splits or any(split not in ("validation", "internal_test") for split in splits):
         raise ValueError("Only validation and internal_test evaluation splits are supported")
     saved = json.loads((args.load_run / "run.json").read_text()) if args.load_run else None
+    target_epochs = saved.get("training_epochs_target", saved.get("epochs_trained", args.epochs)) if saved else args.epochs
     if saved:
         if args.model != saved["model"] or args.time_step_minutes != saved["time_step_minutes"]:
             raise ValueError("Requested model or time resolution differs from the saved run")
@@ -88,7 +89,7 @@ def run(args):
         predictor = TrainingMean(means_record["mean"])
         selected_epoch = None
     else:
-        model = construct_model(args.model, n_steps, args.batch, args.device, seed, overrides)
+        model = construct_model(args.model, n_steps, args.batch, args.device, seed, overrides, epochs=target_epochs)
         predictor = StandardizedPredictor(model, means, stds)
         if saved:
             if args.model == "MICE":
@@ -137,6 +138,7 @@ def run(args):
         "training_batch_size": args.batch, "evaluation_batch_size": args.eval_batch,
         "k": args.k, "output_policy": "raw", "fit_performed": not bool(saved),
         "epochs_trained": (saved["epochs_trained"] if saved else len(history)),
+        "training_epochs_target": target_epochs,
     }
     if args.model == "Mean":
         record["training_mean"] = means_record

@@ -62,7 +62,7 @@ class MICE:
         return {"imputation": self.imputer.transform(values.reshape(len(values), -1)).reshape(values.shape)}
 
 
-def construct_model(name, n_steps, batch_size=32, device="cpu", seed=20260926, overrides=None):
+def construct_model(name, n_steps, batch_size=32, device="cpu", seed=20260926, overrides=None, epochs=60):
     """Construct a fresh model with seeded Fourier modes as well as weights.
 
     FEDformer samples Fourier-mode indices at construction. They are not all
@@ -80,7 +80,7 @@ def construct_model(name, n_steps, batch_size=32, device="cpu", seed=20260926, o
     cls = getattr(imputation, name)
     signature = inspect.signature(cls.__init__).parameters
     defaults = {
-        "n_steps": n_steps, "n_features": 2, "epochs": 1, "batch_size": batch_size,
+        "n_steps": n_steps, "n_features": 2, "epochs": epochs, "batch_size": batch_size,
         "device": device, "rnn_hidden_size": 128, "n_layers": 2, "d_model": 256,
         "n_heads": 4, "d_ffn": 256, "d_k": 64, "d_v": 64, "dropout": 0.1,
         "top_k": 3, "n_kernels": 5, "n_diffusion_steps": 50, "n_channels": 64,
