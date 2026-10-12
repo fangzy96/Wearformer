@@ -1,0 +1,40 @@
+# Local Python environments and caches
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+envs/
+*.egg-info/
+build/
+dist/
+
+# Downloaded data and generated experiment artifacts
+/data/
+/checkpoints/
+/runs/
+/outputs/
+/results/
+*.pt
+*.pth
+*.ckpt
+*.pkl
+*.pickle
+*.npy
+*.npz
+*.h5
+*.hdf5
+*.parquet
+*.zip
+*.tar
+*.tar.gz
+
+# Local machine/editor settings
+.DS_Store
+.idea/
+.vscode/
+.env
+.env.*
+*.log
