@@ -110,6 +110,6 @@ docs/           Data and reproduction instructions
 ```
 
 [Data sources](docs/data.md) · [Confidence](confidence/README.md) ·
-[Training-day analysis](analysis/README.md) · [Third-party attribution](THIRD_PARTY.md)
+[Training-day analysis](analysis/README.md)
 
 A license for the original Wearformer code has not yet been selected.
