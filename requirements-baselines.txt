@@ -1,0 +1,3 @@
+-r requirements.txt
+pypots==1.5
+scikit-learn==1.7.2

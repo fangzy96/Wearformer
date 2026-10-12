@@ -43,4 +43,5 @@ Observation masks distinguish naturally missing values from measured zeros. Afte
 
 Fit input normalization and personal summaries using training dates only. Preserve each participant's validation and test dates across methods and training-day conditions. See the [reproduction protocol](reproduction.md) for eligibility, temporal aggregation, normalization and evaluation rules.
 
-The preprocessing entry points and exact source-file mapping will be added with the final implementation. The directory layout above is organizational guidance, not a claim that the source archives are already in model-ready form.
+See [preprocessing commands and file schemas](preprocessing.md) for the raw-file
+roster, daily pool builder, ten-minute aggregation and frozen evaluation gaps.

@@ -1,0 +1,53 @@
+{
+  "time_step_minutes": 1,
+  "model": {
+    "seq_len": 1440,
+    "n_layers": 2,
+    "d_model": 256,
+    "n_heads": 4,
+    "d_k": 64,
+    "d_v": 64,
+    "d_ffn": 256,
+    "dropout": 0.0,
+    "attn_dropout": 0.0,
+    "local_conv": 91
+  },
+  "training": {
+    "epochs": 60,
+    "batch_size": 64,
+    "learning_rate": 0.001,
+    "weight_decay": 0.0,
+    "grad_clip": 1.0,
+    "samples_per_participant": 52,
+    "seed": 20260907,
+    "anchors": [
+      1,
+      30,
+      60,
+      120,
+      240,
+      480,
+      720,
+      840
+    ],
+    "flank": 60,
+    "flank_observed": 30,
+    "min_observed_frac": 0.5,
+    "scatter_rate": 0.15,
+    "num_workers": 0
+  },
+  "evaluation": {
+    "gap_lengths": [
+      1,
+      10,
+      30,
+      60,
+      120,
+      240,
+      480,
+      720
+    ],
+    "events_per_day": 4,
+    "batch_size": 32
+  }
+}

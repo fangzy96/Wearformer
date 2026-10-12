@@ -1,0 +1,4 @@
+# Reference versions for the model and preprocessing code (Python 3.10+).
+numpy==1.26.4
+pandas==2.3.3
+torch==2.8.0

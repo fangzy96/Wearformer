@@ -1,6 +1,10 @@
 # Reproduction protocol
 
-This document describes the protocol used in the Wearformer manuscript. The complete training and evaluation code is being prepared for release; executable instructions will accompany that code.
+This document describes the model and evaluation protocol. Executable entry
+points are in the [README](../README.md), with additional
+[experiment commands](experiments.md) and [data preparation details](preprocessing.md).
+Original data, individual assignments and trained weights are not bundled;
+generating new manifests does not reproduce historical assignments exactly.
 
 ## Data and evaluation settings
 
@@ -15,7 +19,7 @@ Large Fitbit and Apple Watch use data from Alavi et al.; Small Fitbit uses data 
 
 Each input contains one calendar day of heart rate (HR) and step counts (Steps), with a separate observation mask for each channel. HR is measured in beats per minute; Steps is measured in counts per sampling interval.
 
-- Qualifying days have at least 80% data availability, using HR observations as the indicator. Incomplete first and last days are excluded.
+- Qualifying days have at least 80% data availability, using HR observations as the indicator. Boundary-day handling follows the [dataset-specific preprocessing](preprocessing.md).
 - Participants have at least 25 qualifying days. Their qualifying dates are randomly ordered using a fixed seed: ten dates are assigned to test, five to validation, and all remaining dates to training. A date belongs to only one split.
 - Under the Fitbit recording convention, missing Steps entries at HR-observed minutes are assigned zero and treated as observed. Steps recorded without HR are discarded.
 - At ten-minute resolution, any valid HR observation makes a bin observed. HR is the median of available samples. Fitbit Steps sums the counts at HR-observed minutes; Apple Watch interval counts are allocated in proportion to their overlap with each bin. Partially observed bins are not rescaled.
@@ -79,4 +83,10 @@ The training-day analysis uses a fixed training cohort of participants who have 
 
 ## Recorded software environment
 
-The experiments used Python 3.10 and PyTorch 2.8 on a single NVIDIA A100 or V100 GPU, with CUDA 12.8 or 12.6. Recorded NumPy versions were 2.2.6 for the A100 stack and 1.26.4 for the V100 stack. Neural comparator implementations used PyPOTS 1.5; MICE used scikit-learn 1.7.2. These are recorded experiment versions, not yet a complete installation specification. Exact environments and executable entry points will be included with the code release.
+The experiments used Python 3.10 and PyTorch 2.8 on a single NVIDIA A100 or V100
+GPU, with CUDA 12.8 or 12.6. Recorded NumPy versions were 2.2.6 for the A100 stack
+and 1.26.4 for the V100 stack. Neural comparators used PyPOTS 1.5; MICE used
+scikit-learn 1.7.2. Direct dependencies are pinned in `requirements.txt` and
+`requirements-baselines.txt`; choose the PyTorch CUDA build for your machine.
+These files are not full transitive environment lockfiles. Backend and software
+version differences can affect numerical results.
